@@ -10,14 +10,17 @@ class ScreenSize {
         MediaQuery.of(context).size.width < 1200.0;
   }
 
+  bool isDesktop({required BuildContext context}) {
+    return MediaQuery.of(context).size.width > 800.0;
+  }
+
   bool isTablet({required BuildContext context}) {
     return MediaQuery.of(context).size.width > 600.0 &&
         MediaQuery.of(context).size.width < 800.0;
   }
 
   bool isMobile({required BuildContext context}) {
-    return MediaQuery.of(context).size.width > 319.0 &&
-        MediaQuery.of(context).size.width < 519.0;
+    return MediaQuery.of(context).size.width < 599.0;
   }
 
   double totalWidth({required BuildContext context}) {

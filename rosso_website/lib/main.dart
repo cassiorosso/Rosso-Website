@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Agrícola Veterinária Rosso ',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: "Montserrat",
+        fontFamily: "Didact Gothic",
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primarySwatch: Colors.blue,
       ),
