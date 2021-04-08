@@ -25,13 +25,13 @@ class OurWork extends StatelessWidget {
           SizedBox(height: 20,),
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
           ),
           SizedBox(height: 10,),
           Text(
             text,
-            textAlign: TextAlign.left,
-            style: TextStyle(letterSpacing: 1, fontSize: 17)
+            textAlign: TextAlign.center,
+            style: TextStyle(letterSpacing: 1, fontSize: 16, fontWeight: FontWeight.w300, height: 1.4)
           ),
         ],
       ),

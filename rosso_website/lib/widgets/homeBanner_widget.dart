@@ -8,23 +8,18 @@ class HomeBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: size.col_12(context: context),
       child: CarouselSlider(
         options: CarouselOptions(
+          aspectRatio: 1920/768, // Resolution 1920 x 768
           viewportFraction: 1,
-          disableCenter: true,
-          //height: 600,
           autoPlay: true,
         ),
         items: [
-          // Container(
-          //   width: 1080,
-          //   height: 800,
-          //   color: Colors.blueAccent,
-          // ),
-          Container(
-            width: size.col_12(context: context),
-            child: Image.asset("/images/teste.jpg", fit: BoxFit.cover/*BoxFit.fitHeight*/,),
-          ),
+          Image.asset("/images/banner1.png",),
+          Image.asset("/images/banner2.png",),
+          Image.asset("/images/banner3.png",),
+          Image.asset("/images/banner4.png",),
         ],
       ),
     );

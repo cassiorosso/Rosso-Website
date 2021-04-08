@@ -8,7 +8,7 @@ class FloatingActionButtonWhatsapp extends StatelessWidget {
     return FloatingActionButton(
       backgroundColor: Colors.transparent,
       onPressed: () {
-        js.context.callMethod('open', ['https://web.whatsapp.com/send?phone=5554991413355&text=Ol%C3%A1!']);
+        js.context.callMethod('open', ['https://api.whatsapp.com/send?phone=5554991413355&text=Ol%C3%A1!']);
       },
       child: Image.asset("assets/images/whatsapp.png"),
       );

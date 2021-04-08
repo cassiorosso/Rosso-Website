@@ -24,7 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
   carousel_slider: ^4.0.0-nullsafety.0
-  webview_flutter: ^2.0.2
+  hasura_connect: ^3.0.0+1
+  get: ^4.1.2
+  flutter_dotenv: ^4.0.0-nullsafety.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -50,13 +52,23 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/images/logo.png
-     - assets/images/teste.jpg
-     - assets/images/teste2.jpg
+     - assets/images/banner1.png
+     - assets/images/comercio.jpg
      - assets/images/location.png
      - assets/images/location_mobile.png
      - assets/images/instagram.png
      - assets/images/facebook.png
      - assets/images/whatsapp.png
+     - assets/images/background.jpg
+     - assets/images/loja1.jpg
+     - assets/images/polygon.png
+     - assets/images/quemsomos2.jpg
+     - assets/images/hortifruti.jpg
+     - assets/images/veterinario.jpg
+     - assets/images/banner2.png
+     - assets/images/banner3.png
+     - assets/images/banner4.png
+     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -78,7 +90,13 @@ flutter:
         - asset: assets/fonts/Montserrat-Regular.ttf
     - family: Didact Gothic
       fonts:
-        - asset: assets/fonts/DidactGothic-Regular.ttf    
+        - asset: assets/fonts/DidactGothic-Regular.ttf
+    - family: Tanseek Modern Pro Arabic
+      fonts:
+        - asset: assets/fonts/tanseek-modern-pro-arabic-bold.ttf
+    - family: Abadi
+      fonts:
+        - asset: assets/fonts/AbadiStd.ttf     
 
 
   #   - family: Trajan Pro

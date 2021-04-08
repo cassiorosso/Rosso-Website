@@ -54,6 +54,49 @@ class LocationMap extends StatelessWidget {
         ));
   }
 }
+
+/*
+import 'dart:html';
+import 'dart:ui' as ui;
+
+import 'package:flutter/material.dart';
+import 'package:rosso_website/utils/scree_size.dart';
+
+Widget LocationMap(BuildContext context) {
+  final ScreenSize size = ScreenSize();
+  String htmlId = "7";
+  // ignore: undefined_prefixed_name
+  ui.platformViewRegistry.registerViewFactory(
+      htmlId,
+      (int viewId) => IFrameElement()
+        ..width = '640'
+        ..height = '480'
+        ..src =
+            "https://www.google.com/maps/d/u/0/embed?mid=1UYlgJNH3BaGLHAzkijzvfpjnMV8doYHU"
+        //..style.border = '4px white solid'
+        //..style.overflow = 'hidden'
+        //..allowFullscreen = true
+        //..allow = "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        );
+
+  // var contentString =
+  //     """<div class="fb-page" data-href="https://www.facebook.com/agricolavetrosso/"
+  //     data-tabs="timeline" data-width="" data-height="" data-small-header="false"
+  //     data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+  //     <blockquote cite="https://www.facebook.com/agricolavetrosso/" class="fb-xfbml-parse-ignore">
+  //     <a href="https://www.facebook.com/agricolavetrosso/">Agrícola Veterinária Rosso</a>
+  //     </blockquote></div>""";
+  //     );
+
+  return Container(width: size.col_12(context: context), height: 500,child: HtmlElementView(viewType: htmlId));
+}
+
+
+/*
+<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1UYlgJNH3BaGLHAzkijzvfpjnMV8doYHU" width="640" height="480"></iframe>
+*/
+
+
 // Widget getMap() {
 //   String htmlId = "7";
 //   // ignore: undefined_prefixed_name
@@ -106,4 +149,4 @@ class LocationMap extends StatelessWidget {
 //   });
 
 //   return HtmlElementView(viewType: htmlId);
-//}
+//}*/
