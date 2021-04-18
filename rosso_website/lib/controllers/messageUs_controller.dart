@@ -1,11 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:rosso_website/interfaces/database_interface.dart';
 import 'package:rosso_website/models/message_model.dart';
+import 'package:rosso_website/models/network_response_model.dart';
+
+enum Status { LOADING, ERROR, SUCCESS, IDLE }
 
 class MessageUsController {
   MessageModel messageUs =
       MessageModel(name: "", email: "", phone: "", message: "");
   final db = Get.find<IDatabase>();
+  NetworkResponseModel returnMessage = NetworkResponseModel(data: "", error: "");
+  Status status = Status.IDLE;
+
+  MessageUsController();
 
   //Setters
   void setName(String? name) => messageUs.name = name!;
@@ -13,7 +21,7 @@ class MessageUsController {
   void setEmail(String? email) => messageUs.email = email!;
   void setMessage(String? message) => messageUs.message = message!;
 
-  //Validators
+  //Input Validators
   String? validateString(String? value) =>
       value!.isEmpty ? 'Por favor, preencha esse campo!' : null;
 
@@ -26,9 +34,15 @@ class MessageUsController {
       return null;
   }
 
-  void sendEmail() {
+  Future<void> sendEmail(VoidCallback refreshPage) async {
     // Logic to send Email
-    db.sendMessage(messageUs);
-    //repo.sendMessage(messageUs);
+    status = Status.LOADING;
+    refreshPage();
+    returnMessage = await db.sendMessage(messageUs);
+    if (returnMessage.error.isEmpty)
+      status = Status.SUCCESS;
+    else
+      status = Status.ERROR;
+    refreshPage();
   }
 }

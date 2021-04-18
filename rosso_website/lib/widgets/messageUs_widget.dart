@@ -10,15 +10,12 @@ class MessageUsWidget extends StatefulWidget {
 
 class _MessageUsWidgetState extends State<MessageUsWidget> {
   final ScreenSize size = ScreenSize();
-
-  final _formKey = GlobalKey<FormState>();
-
   final _messageUsController = MessageUsController();
-
-  bool sendMessage = false;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final VoidCallback refreshPage = () => setState(() {});
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -146,26 +143,44 @@ class _MessageUsWidgetState extends State<MessageUsWidget> {
                   ),
                   Row(
                     children: [
-                      sendMessage == true
-                          ? Text(
-                              " Mensagem enviada!",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                  color: Colors.red[600]),
-                            )
-                          : Text(""),
+                      Builder(builder: (BuildContext context) {
+                        if (_messageUsController.status == Status.LOADING)
+                          return Container(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.white,
+                            ),
+                          );
+                        if (_messageUsController.status == Status.ERROR)
+                          return Text(
+                            "Erro ao enviar mensagem!\n${_messageUsController.returnMessage.error}",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                color: Colors.red[600]),
+                          );
+                        if (_messageUsController.status == Status.SUCCESS)
+                          return Text(
+                            "Mensagem enviada com sucesso!",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.red[600]),
+                          );
+                        else
+                          return Text("");
+                      }),
                       Spacer(),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               elevation: 2,
                               primary: Colors.red,
                               onPrimary: Colors.white),
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-                              _messageUsController.sendEmail();
-                              setState(() => sendMessage = true);
+                              await _messageUsController.sendEmail(refreshPage);
                             }
                           },
                           child: Container(
