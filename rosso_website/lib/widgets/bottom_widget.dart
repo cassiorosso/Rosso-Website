@@ -8,7 +8,7 @@ class Bottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       width: size.col_12(context: context),
       color: Colors.indigo,
       child: Text(

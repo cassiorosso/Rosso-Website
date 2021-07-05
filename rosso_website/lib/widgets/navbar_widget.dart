@@ -27,9 +27,9 @@ class Navbar extends StatelessWidget {
                 Color.fromRGBO(32, 171, 16, 1)
               ])),
       width: size.col_12(context: context),
-      height: size.isMobile(context: context) ? 120 : 70,
+      height: size.isMobile(context: context) ? 120 : 80,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: size.isMobile(context: context) ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         mainAxisAlignment: size.isDesktop(context: context)
             ? MainAxisAlignment.spaceEvenly
             : MainAxisAlignment.spaceBetween,
@@ -47,7 +47,7 @@ class Navbar extends StatelessWidget {
                       },
                       icon: Icon(
                         Icons.menu_rounded,
-                        size: 32,
+                        size: 34,
                         color: Colors.green[900],
                       ))),
           Column(

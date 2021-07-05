@@ -38,7 +38,7 @@ class HomeBanner extends StatelessWidget {
                             Icons.arrow_forward_ios_rounded,
                             color: Colors.red[700],
                           ),
-                          iconSize: 40,
+                          iconSize: 45,
                           onPressed: () {
                             buttonCarouselController.nextPage();
                           },
@@ -51,7 +51,7 @@ class HomeBanner extends StatelessWidget {
                             Icons.arrow_back_ios_new_rounded,
                             color: Colors.red[700],
                           ),
-                          iconSize: 40,
+                          iconSize: 45,
                           onPressed: () {
                             buttonCarouselController.previousPage();
                           },

@@ -3,7 +3,6 @@ import 'package:rosso_website/pages/about_us_page.dart';
 import 'package:rosso_website/pages/base_page.dart';
 import 'package:rosso_website/pages/contact_page.dart';
 import 'package:rosso_website/pages/home_page.dart';
-import 'package:rosso_website/pages/login_page.dart';
 import 'package:rosso_website/pages/product_page.dart';
 import 'package:rosso_website/pages/products_page.dart';
 import 'package:rosso_website/routes/generate_page_route.dart';
@@ -46,9 +45,9 @@ class RouteGenerator {
             widget: BasePage(widget: ProductsPage()) ,
             routeName:
                 '/products'); //MaterialPageRoute(builder: (_) => ProductsPage());
-      case '/login':
-        //return MaterialPageRoute(builder: (_) => LoginPage());
-        return GeneratePageRoute(widget: LoginPage(), routeName: '/login');
+      // case '/login':
+      //   return MaterialPageRoute(builder: (_) => LoginPage());
+      //   return GeneratePageRoute(widget: LoginPage(), routeName: '/login');
       // case '/product':
       //   // Validation of correct data type
       //   if (args is ProductModel) {

@@ -10,8 +10,7 @@ class HasuraRepository implements IDatabase {
   final HasuraConnect _hasuraConnect;
   final HasuraDocs _hasuraDocs;
 
-  HasuraRepository(this._hasuraConnect, this._hasuraDocs) {
-  }
+  HasuraRepository(this._hasuraConnect, this._hasuraDocs);
 
   @override
   Future<NetworkResponseModel> sendMessage(MessageModel message) async {
@@ -145,8 +144,9 @@ class HasuraRepository implements IDatabase {
               snapshot2["data"]["website_db_produtos"][i]));
         }
         response.count = snapshot["data"]["website_db_produtos_aggregate"]
-          ["aggregate"]["count"] + snapshot2["data"]["website_db_produtos_aggregate"]
-            ["aggregate"]["count"];
+                ["aggregate"]["count"] +
+            snapshot2["data"]["website_db_produtos_aggregate"]["aggregate"]
+                ["count"];
       }
       response.data = produtos;
       return response;

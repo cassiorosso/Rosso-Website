@@ -51,7 +51,7 @@ class ProductsController extends GetxController {
       currentPage = ((offset / limit) + 1).toInt();
       products.assignAll(response.data);
       products.removeWhere((element) => element.visivel == false);
-      textInfo = "Produtos encontrados '${search.replaceAll('%', '')}': ${response.count}";
+      textInfo = "Produtos encontrados '${search.replaceAll('%', ' ').trim()}': ${response.count}";
       productStatus.value = Status.SUCCESS;
     } else
       productStatus.value = Status.ERROR;

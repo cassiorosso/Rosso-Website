@@ -38,7 +38,7 @@ class BasePage extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: size.isMobile(context: context) ? 110 : 70,
+                      height: size.isMobile(context: context) ? 120 : 80,
                     ), //Altura da Navbar
                     widget,
                     SizedBox(

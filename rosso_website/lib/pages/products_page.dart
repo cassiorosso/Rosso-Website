@@ -28,7 +28,8 @@ class _ProductsPageState extends State<ProductsPage> {
       setState(() {
         var scrollParent = context.findAncestorWidgetOfExactType<Scrollbar>();
         if (scrollParent!.controller!.hasClients)
-          scrollParent.controller!.jumpTo(scrollParent.controller!.position.minScrollExtent);
+          scrollParent.controller!
+              .jumpTo(scrollParent.controller!.position.minScrollExtent);
       });
     };
 
@@ -41,7 +42,28 @@ class _ProductsPageState extends State<ProductsPage> {
     return Column(
       children: [
         SizedBox(
-          height: 25,
+          height: 20,
+        ),
+        Visibility(
+            visible: size.isMobile(context: context),
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    elevation: 2,
+                    primary: Colors.red[400],
+                    onPrimary: Colors.white),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  child: Text(
+                    "Categorias",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ))),
+        SizedBox(
+          height: 15,
         ),
         Container(
           width: size.col_12(context: context),
@@ -110,7 +132,8 @@ class _ProductsPageState extends State<ProductsPage> {
                           ),
                           Text(
                             _controller.textInfo,
-                            style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.grey[600]),
                           ),
                           SizedBox(
                             height: 5,

@@ -112,9 +112,9 @@ class _ProductPageState extends State<ProductPage> {
                         child: IconButton(
                           icon: Icon(
                             Icons.arrow_forward_ios_rounded,
-                            color: _controller.produto.produtosImagens.length <=1 ? Colors.transparent : Colors.grey[600],
+                            color: _controller.produto.produtosImagens.length <=1 ? Colors.transparent : Colors.grey[700],
                           ),
-                          iconSize: 36,
+                          iconSize: 38,
                           onPressed: () {
                             buttonCarouselController.nextPage();
                           },
@@ -125,9 +125,9 @@ class _ProductPageState extends State<ProductPage> {
                         child: IconButton(
                           icon: Icon(
                             Icons.arrow_back_ios_new_rounded,
-                            color: _controller.produto.produtosImagens.length <=1 ? Colors.transparent : Colors.grey[600],
+                            color: _controller.produto.produtosImagens.length <=1 ? Colors.transparent : Colors.grey[700],
                           ),
-                          iconSize: 36,
+                          iconSize: 38,
                           onPressed: () {
                             buttonCarouselController.previousPage();
                           },
@@ -180,6 +180,7 @@ class _ProductPageState extends State<ProductPage> {
                                 children: [
                                   Text(
                                     "Compre por Whatsapp",
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   ),
@@ -193,7 +194,7 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             )),
                         Text(
-                            "\n\n*Venda por Whatsapp válida apenas para Passo Fundo - RS")
+                            "\n\n*Venda por Whatsapp válida apenas para Passo Fundo - RS", textAlign: TextAlign.center,)
                       ],
                     ),
                   ),

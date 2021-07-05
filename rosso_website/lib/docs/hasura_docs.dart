@@ -56,6 +56,10 @@ class HasuraDocs {
             id
             nome
             visivel
+            destaque
+            categoria_id
+            sub_categoria_id
+            cod_referencia
             produtos_imagens {
               url
             }
@@ -74,6 +78,10 @@ class HasuraDocs {
           nome
           id
           visivel
+          categoria_id
+          sub_categoria_id
+          destaque
+          cod_referencia
           produtos_imagens {
             url
           }
@@ -92,6 +100,10 @@ class HasuraDocs {
           nome
           id
           visivel
+          destaque
+          categoria_id
+          sub_categoria_id
+          cod_referencia
           produtos_imagens {
             url
           }
@@ -110,6 +122,10 @@ class HasuraDocs {
           nome
           id
           visivel
+          destaque
+          categoria_id
+          sub_categoria_id
+          cod_referencia
           produtos_imagens {
             url
           }
