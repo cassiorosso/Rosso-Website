@@ -11,12 +11,6 @@ class HasuraRepository implements IDatabase {
   final HasuraDocs _hasuraDocs;
 
   HasuraRepository(this._hasuraConnect, this._hasuraDocs) {
-    // _hasuraConnect.headers!.addAll({
-    //   //REMOVER EM PRODUÇÃO
-    //   "x-hasura-editor-email": "contato@agricolavetrosso.com.br",
-    //   "x-hasura-editor-token":
-    //       "f9fad147562b6439c13afd9d5967c6980c58ade7021c0f6a9a52c1a7327f6c579f42d5ad89d31cad860702d8d240d6f4bfc299d322c472a2062df55c2c2181af",
-    // });
   }
 
   @override
