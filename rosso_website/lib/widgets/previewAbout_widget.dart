@@ -32,14 +32,14 @@ class PreviewAbout extends StatelessWidget {
           //color: Colors.transparent,
           width: size.isDesktop(context: context) ? size.col_7(context: context) : size.col_10(context: context),
           child: Text(
-            "A Agrícola Veterinária Rosso atua por mais de 30 anos no comércio de Passo Fundo, sendo referência na região com uma loja de mais de 250m², atuando nos departamentos agrícola, veterinário, pet, pesca, camping, ferragens, utilidades, insumos, rações e medicamentos.",
+            "A Agrícola Veterinária Rosso atua por mais de 30 anos no comércio de Passo Fundo, sendo referência na região com uma loja de mais de 250m², auxiliando nos departamentos agrícola, veterinário, pet, pesca, camping, ferragens, utilidades, insumos, rações e medicamentos.",
             textAlign: TextAlign.center,
             style: TextStyle(
-                letterSpacing: 0.5,
-                fontSize: 18,
+                //letterSpacing: 0.5,
+                fontSize: 16,
                 height: 1.5,
-                fontWeight: FontWeight.w400,
-                color: Colors.black),
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[800]),
           ),
         ),
         SizedBox(

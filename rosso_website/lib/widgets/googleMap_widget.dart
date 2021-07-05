@@ -1,11 +1,54 @@
-//import 'dart:html';
+/*//import 'dart:html';
 //import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 //import 'package:google_maps/google_maps.dart';
 import 'package:rosso_website/utils/scree_size.dart';
-import 'dart:js' as js;
+import 'dart:js' as js;*/
 
-class LocationMap extends StatelessWidget {
+import 'dart:html';
+import 'dart:ui' as ui;
+
+import 'package:flutter/material.dart';
+import 'package:rosso_website/utils/scree_size.dart';
+
+Widget LocationMap(BuildContext context) {
+  final size = ScreenSize();
+  return Container(
+    height: 500,
+    width: size.col_12(context: context),
+    child: googleMap(),
+  );
+}
+
+Widget googleMap() {
+  String htmlId = "8";
+  // ignore: undefined_prefixed_name
+  ui.platformViewRegistry.registerViewFactory(
+      htmlId,
+      (int viewId) => IFrameElement()
+        ..width = '800'
+        ..height = '500'
+        ..src =
+            "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3513.6923284634636!2d-52.3806839!3d-28.2773447!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x80f4f861965e0a06!2sAgr%C3%ADcola%20Veterin%C3%A1ria%20Rosso!5e0!3m2!1spt-BR!2sbr!4v1624805706604!5m2!1spt-BR!2sbr"
+        //..style.border = '10px white solid'
+        ..style.overflow = 'hidden'
+        ..allowFullscreen = true
+        ..style.border = "0"
+        ..allow =
+            "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share");
+
+  // var contentString =
+  //     """<div class="fb-page" data-href="https://www.facebook.com/agricolavetrosso/"
+  //     data-tabs="timeline" data-width="" data-height="" data-small-header="false"
+  //     data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+  //     <blockquote cite="https://www.facebook.com/agricolavetrosso/" class="fb-xfbml-parse-ignore">
+  //     <a href="https://www.facebook.com/agricolavetrosso/">Agrícola Veterinária Rosso</a>
+  //     </blockquote></div>""";
+  //     );
+
+  return HtmlElementView(viewType: htmlId);
+}
+/*class LocationMap extends StatelessWidget {
   final ScreenSize size = ScreenSize();
 
   @override
@@ -23,7 +66,7 @@ class LocationMap extends StatelessWidget {
                 size.isMobile(context: context) ?
                 "assets/images/location_mobile.png" :
                 "assets/images/location.png",
-                fit: BoxFit.none,
+                fit: size.isMobile(context: context) ? BoxFit.none : BoxFit.fitWidth,
                 //scale: 0.2,
               ),
             ),
@@ -53,8 +96,8 @@ class LocationMap extends StatelessWidget {
           ],
         ));
   }
-}
-
+}*/
+// <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3513.692327975283!2d-52.3806838670208!3d-28.27734471479822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x80f4f861965e0a06!2sAgricultural%20Veterinary%20Rosso!5e0!3m2!1sen!2sbr!4v1624805617124!5m2!1sen!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 /*
 import 'dart:html';
 import 'dart:ui' as ui;
@@ -95,6 +138,7 @@ Widget LocationMap(BuildContext context) {
 /*
 <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1UYlgJNH3BaGLHAzkijzvfpjnMV8doYHU" width="640" height="480"></iframe>
 */
+// <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3513.6923284634636!2d-52.3806839!3d-28.2773447!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x80f4f861965e0a06!2sAgr%C3%ADcola%20Veterin%C3%A1ria%20Rosso!5e0!3m2!1spt-BR!2sbr!4v1624805706604!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
 
 // Widget getMap() {

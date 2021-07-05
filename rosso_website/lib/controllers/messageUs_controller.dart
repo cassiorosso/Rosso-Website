@@ -8,18 +8,18 @@ enum Status { LOADING, ERROR, SUCCESS, IDLE }
 
 class MessageUsController {
   MessageModel messageUs =
-      MessageModel(name: "", email: "", phone: "", message: "");
+      MessageModel(nome: "", email: "", telefone: "", mensagem: "", lido: false, createdAt: null , id: null,);
   final db = Get.find<IDatabase>();
-  NetworkResponseModel returnMessage = NetworkResponseModel(data: "", error: "");
+  NetworkResponseModel returnMessage = NetworkResponseModel(data: "", error: "", count: 0);
   Status status = Status.IDLE;
 
   MessageUsController();
 
   //Setters
-  void setName(String? name) => messageUs.name = name!;
-  void setPhone(String? phone) => messageUs.phone = phone!;
+  void setName(String? name) => messageUs.nome = name!;
+  void setPhone(String? phone) => messageUs.telefone = phone!;
   void setEmail(String? email) => messageUs.email = email!;
-  void setMessage(String? message) => messageUs.message = message!;
+  void setMessage(String? message) => messageUs.mensagem = message!;
 
   //Input Validators
   String? validateString(String? value) =>

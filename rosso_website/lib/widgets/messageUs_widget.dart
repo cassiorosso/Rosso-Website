@@ -56,7 +56,7 @@ class _MessageUsWidgetState extends State<MessageUsWidget> {
                     height: 30,
                   ),
                   Container(
-                    width: 430,
+                    width: 500,
                     height: 350,
                     child: FacebookPage(),
                   ),
@@ -153,12 +153,15 @@ class _MessageUsWidgetState extends State<MessageUsWidget> {
                             ),
                           );
                         if (_messageUsController.status == Status.ERROR)
-                          return Text(
-                            "Erro ao enviar mensagem!\n${_messageUsController.returnMessage.error}",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: Colors.red[600]),
+                          return Expanded(
+                            child: Text(
+                              "Erro ao enviar mensagem!\n${_messageUsController.returnMessage.error}",
+                              overflow: TextOverflow.fade,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: Colors.red[600]),
+                            ),
                           );
                         if (_messageUsController.status == Status.SUCCESS)
                           return Text(

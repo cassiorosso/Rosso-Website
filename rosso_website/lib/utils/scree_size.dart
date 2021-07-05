@@ -16,7 +16,7 @@ class ScreenSize {
 
   bool isTablet({required BuildContext context}) {
     return MediaQuery.of(context).size.width > 600.0 &&
-        MediaQuery.of(context).size.width < 800.0;
+        MediaQuery.of(context).size.width <= 800.0;
   }
 
   bool isMobile({required BuildContext context}) {
@@ -36,8 +36,18 @@ class ScreenSize {
     return width;
   }
 
+  double col_1_5({required BuildContext context}) {
+    final width = 13 / 100 * MediaQuery.of(context).size.width;
+    return width;
+  }
+
   double col_2({required BuildContext context}) {
     final width = 16.66 / 100 * MediaQuery.of(context).size.width;
+    return width;
+  }
+
+  double col_2_5({required BuildContext context}) {
+    final width = 21 / 100 * MediaQuery.of(context).size.width;
     return width;
   }
 
@@ -73,6 +83,11 @@ class ScreenSize {
 
   double col_9({required BuildContext context}) {
     final width = 75 / 100 * MediaQuery.of(context).size.width;
+    return width;
+  }
+
+    double col_9_5({required BuildContext context}) {
+    final width = 77 / 100 * MediaQuery.of(context).size.width;
     return width;
   }
 
