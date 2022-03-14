@@ -3,6 +3,7 @@ import 'package:rosso_website/pages/about_us_page.dart';
 import 'package:rosso_website/pages/base_page.dart';
 import 'package:rosso_website/pages/contact_page.dart';
 import 'package:rosso_website/pages/home_page.dart';
+import 'package:rosso_website/pages/login_page.dart';
 import 'package:rosso_website/pages/product_page.dart';
 import 'package:rosso_website/pages/products_page.dart';
 import 'package:rosso_website/routes/generate_page_route.dart';
@@ -16,38 +17,38 @@ class RouteGenerator {
 
     final List<String> splittedRouteName = settings.name!.split("/");
     if (splittedRouteName.length == 3 &&
-        splittedRouteName[1] == 'product' &&
+        splittedRouteName[1] == 'produto' &&
         _numericInt.hasMatch(splittedRouteName[2]) == true) {
       productId = int.parse(splittedRouteName[2]);
       return GeneratePageRoute(
           widget: BasePage(widget: ProductPage(productId: productId)),
-          routeName: '/product/$productId');
+          routeName: '/produto/$productId');
     }
 
     switch (settings.name) {
-      case '/home':
+      case '/inicio':
         return GeneratePageRoute(
             widget: BasePage(widget: HomePage()),
             routeName:
-                '/home'); //MaterialPageRoute(builder: (_) => HomePage());
-      case '/aboutUs':
+                '/inicio'); //MaterialPageRoute(builder: (_) => HomePage());
+      case '/empresa':
         return GeneratePageRoute(
             widget: BasePage(widget: AboutUsPage()) ,
             routeName:
-                '/aboutUs'); //MaterialPageRoute(builder: (_) => AboutUsPage());
-      case '/contact':
+                '/empresa'); //MaterialPageRoute(builder: (_) => AboutUsPage());
+      case '/contato':
         return GeneratePageRoute(
             widget: BasePage(widget: ContactPage()) ,
             routeName:
-                '/contact'); //MaterialPageRoute(builder: (_) => ContactPage());
-      case '/products':
+                '/contato'); //MaterialPageRoute(builder: (_) => ContactPage());
+      case '/produtos':
         return GeneratePageRoute(
             widget: BasePage(widget: ProductsPage()) ,
             routeName:
-                '/products'); //MaterialPageRoute(builder: (_) => ProductsPage());
-      // case '/login':
-      //   return MaterialPageRoute(builder: (_) => LoginPage());
-      //   return GeneratePageRoute(widget: LoginPage(), routeName: '/login');
+                '/produtos'); //MaterialPageRoute(builder: (_) => ProductsPage());
+      case '/login':
+        //return MaterialPageRoute(builder: (_) => LoginPage());
+       return GeneratePageRoute(widget: LoginPage(), routeName: '/login');
       // case '/product':
       //   // Validation of correct data type
       //   if (args is ProductModel) {

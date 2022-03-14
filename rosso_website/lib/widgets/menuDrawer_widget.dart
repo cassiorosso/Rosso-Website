@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:rosso_website/stores/categories_store.dart';
 import 'dart:js' as js;
-
 import 'package:rosso_website/utils/scree_size.dart';
-
-import 'categories_widget.dart';
 
 class MenuDrawer extends StatelessWidget {
   final ScreenSize size = ScreenSize();
-  final _categoriesStore = Get.find<CategoriesStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +28,10 @@ class MenuDrawer extends StatelessWidget {
                   title: Text("Início"),
                   leading: Icon(Icons.home),
                   onTap: () {
-                    if (ModalRoute.of(context)!.settings.name == "/home")
-                      Navigator.popAndPushNamed(context, "/home");
+                    if (ModalRoute.of(context)!.settings.name == "/inicio")
+                      Navigator.popAndPushNamed(context, "/inicio");
                     else
-                      Navigator.pushNamed(context, "/home");
+                      Navigator.pushNamed(context, "/inicio");
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(2)),
@@ -46,10 +40,10 @@ class MenuDrawer extends StatelessWidget {
                   title: Text("Quem somos"),
                   leading: Icon(Icons.store_mall_directory_outlined),
                   onTap: () {
-                    if (ModalRoute.of(context)!.settings.name == "/aboutUs")
-                      Navigator.popAndPushNamed(context, "/aboutUs");
+                    if (ModalRoute.of(context)!.settings.name == "/empresa")
+                      Navigator.popAndPushNamed(context, "/empresa");
                     else
-                      Navigator.pushNamed(context, "/aboutUs");
+                      Navigator.pushNamed(context, "/empresa");
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(2),
@@ -59,10 +53,10 @@ class MenuDrawer extends StatelessWidget {
                   title: Text("Produtos"),
                   leading: Icon(Icons.add_shopping_cart_rounded),
                   onTap: () {
-                    if (ModalRoute.of(context)!.settings.name == "/products")
-                      Navigator.popAndPushNamed(context, "/products");
+                    if (ModalRoute.of(context)!.settings.name == "/produtos")
+                      Navigator.popAndPushNamed(context, "/produtos");
                     else
-                      Navigator.pushNamed(context, "/products");
+                      Navigator.pushNamed(context, "/produtos");
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(2)),
@@ -71,44 +65,18 @@ class MenuDrawer extends StatelessWidget {
                   title: Text("Contato"),
                   leading: Icon(Icons.quick_contacts_mail_sharp),
                   onTap: () {
-                    if (ModalRoute.of(context)!.settings.name == "/contact")
-                      Navigator.popAndPushNamed(context, "/contact");
+                    if (ModalRoute.of(context)!.settings.name == "/contato")
+                      Navigator.popAndPushNamed(context, "/contato");
                     else
-                      Navigator.pushNamed(context, "/contact");
+                      Navigator.pushNamed(context, "/contato");
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(2)),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 15, left: 20, right: 20),
-                  color: Colors.white,
-                  height: 1,
-                ),
-                Container(
-                  width: size.isTablet(context: context)
-                      ? size.col_4(context: context)
-                      : (MediaQuery.of(context).size.width >= 800 &&
-                              MediaQuery.of(context).size.width <= 1200)
-                          ? size.col_3(context: context)
-                          : size.col_2(context: context),
-                  child: Obx(() {
-                    if (_categoriesStore.allCategories.length == 0)
-                      return Container(
-                          padding: EdgeInsets.all(10),
-                          height: 80,
-                          width: 80,
-                          child: Center(child: CircularProgressIndicator()));
-                    else
-                      return CategoriesWidget(
-                        categories: _categoriesStore.allCategories,
-                        isInDrawer: true,
-                      );
-                  }),
-                ),
                 SizedBox(
                   height: 10,
                 ),
-                Text("  Siga-nos nas redes sociais:"),
+                Text("   Siga-nos nas redes sociais:"),
                 SizedBox(
                   height: 15,
                 ),
@@ -152,7 +120,7 @@ class MenuDrawer extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 10,
+                        width: 15,
                       ),
                     ],
                   ),

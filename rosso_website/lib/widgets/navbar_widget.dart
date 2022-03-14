@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:rosso_website/controllers/products_controller.dart';
 import 'package:rosso_website/utils/scree_size.dart';
@@ -27,7 +26,7 @@ class Navbar extends StatelessWidget {
                 Color.fromRGBO(32, 171, 16, 1)
               ])),
       width: size.col_12(context: context),
-      height: size.isMobile(context: context) ? 120 : 80,
+      height: 65,
       child: Row(
         crossAxisAlignment: size.isMobile(context: context) ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         mainAxisAlignment: size.isDesktop(context: context)
@@ -58,16 +57,16 @@ class Navbar extends StatelessWidget {
                 alignment: size.isDesktop(context: context)
                     ? Alignment.centerLeft
                     : Alignment.center,
-                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                //padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 width: size.isMobile(context: context)
                 ? size.col_4(context: context)
                 : size.col_2(context: context),
                 child: GestureDetector(
                   onTap: () {
-                    if (ModalRoute.of(context)!.settings.name == "/home")
-                      Navigator.popAndPushNamed(context, "/home");
+                    if (ModalRoute.of(context)!.settings.name == "/inicio")
+                      Navigator.popAndPushNamed(context, "/inicio");
                     else
-                      Navigator.pushNamed(context, "/home");
+                      Navigator.pushNamed(context, "/inicio");
                   },
                   child: Image.asset(
                     "assets/images/logo.png",
@@ -87,10 +86,10 @@ class Navbar extends StatelessWidget {
                   width: size.col_1_5(context: context),
                   child: InkWell(
                     onTap: () {
-                      if (ModalRoute.of(context)!.settings.name == "/aboutUs")
-                        Navigator.popAndPushNamed(context, "/aboutUs");
+                      if (ModalRoute.of(context)!.settings.name == "/empresa")
+                        Navigator.popAndPushNamed(context, "/empresa");
                       else
-                        Navigator.pushNamed(context, "/aboutUs");
+                        Navigator.pushNamed(context, "/empresa");
                     },
                     child: Text(
                       "Empresa",
@@ -108,10 +107,10 @@ class Navbar extends StatelessWidget {
                   width: size.col_1_5(context: context),
                   child: InkWell(
                     onTap: () {
-                      if (ModalRoute.of(context)!.settings.name == "/products")
-                        Navigator.popAndPushNamed(context, "/products");
+                      if (ModalRoute.of(context)!.settings.name == "/produtos")
+                        Navigator.popAndPushNamed(context, "/produtos");
                       else
-                        Navigator.pushNamed(context, "/products");
+                        Navigator.pushNamed(context, "/produtos");
                     },
                     child: Container(
                       padding:
@@ -133,10 +132,10 @@ class Navbar extends StatelessWidget {
                   width: size.col_1_5(context: context),
                   child: InkWell(
                     onTap: () {
-                      if (ModalRoute.of(context)!.settings.name == "/contact")
-                        Navigator.popAndPushNamed(context, "/contact");
+                      if (ModalRoute.of(context)!.settings.name == "/contato")
+                        Navigator.popAndPushNamed(context, "/contato");
                       else
-                        Navigator.pushNamed(context, "/contact");
+                        Navigator.pushNamed(context, "/contato");
                     },
                     child: Text(
                       "Contato",

@@ -27,9 +27,9 @@ class MessagesTabController extends GetxController {
     messageStatus.value = Status.LOADING;
     response = await db.getMessages(limit, offset);
     if (response.error.isEmpty) {
-      pages = (response.count / 25).ceil();
-      currentPage = ((offset / 25) + 1).toInt();
-      messages.assignAll(response.data);
+      pages = (response.count / limit).ceil();
+      currentPage = ((offset / limit) + 1).toInt();
+      messages = response.data;
       messageStatus.value = Status.SUCCESS;
     } else
       messageStatus.value = Status.ERROR;

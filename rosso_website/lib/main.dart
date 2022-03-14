@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
+import 'package:rosso_website/controllers/home_controller.dart';
 import 'package:rosso_website/controllers/messages_tab_controller.dart';
 import 'package:rosso_website/controllers/products_controller.dart';
 import 'package:rosso_website/docs/hasura_docs.dart';
@@ -11,8 +12,12 @@ import 'package:rosso_website/stores/categories_store.dart';
 import 'package:rosso_website/stores/user_store.dart';
 import 'controllers/login_controller.dart';
 import 'controllers/products_tab_controller.dart';
+import 'docs/hasura_docs.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 Future main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
+  //await Firebase.initializeApp();
   //Injeção de dependências Get
   Get.put<HasuraDocs>(HasuraDocs());
   Get.put<HasuraConnect>(HasuraConnect(
@@ -20,6 +25,7 @@ Future main() async {
       headers: {"content-type": "application/json"}));
   Get.put<IDatabase>(
       HasuraRepository(Get.find<HasuraConnect>(), Get.find<HasuraDocs>()));
+  Get.put<HomeController>(HomeController());
   Get.put<CategoriesStore>(CategoriesStore());
   Get.lazyPut<ProductsController>(() => ProductsController());
   Get.lazyPut<LoginController>(() => LoginController());
@@ -44,8 +50,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/home',
+      initialRoute: '/inicio',
       onGenerateRoute: RouteGenerator.generateRoute,
+      navigatorObservers: [routeObserver],
     );
   }
 }

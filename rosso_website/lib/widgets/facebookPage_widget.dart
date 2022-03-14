@@ -9,8 +9,8 @@ Widget FacebookPage() {
   ui.platformViewRegistry.registerViewFactory(
       htmlId,
       (int viewId) => IFrameElement()
-        //..width = '500'
-        //..height = '400'
+        ..style.width = '100%'
+        ..style.height = '100%'
         ..src =
             "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fagricolavetrosso%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
         //..style.border = '10px white solid'

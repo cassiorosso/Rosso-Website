@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:rosso_website/controllers/products_controller.dart';
+import 'package:rosso_website/controllers/products_tab_controller.dart';
 import 'package:rosso_website/models/category_model.dart';
 
 class CategoryTile extends StatefulWidget {
   final CategoryModel category;
-  final bool isInDrawer;
 
   CategoryTile({
     Key? key,
     required this.category,
-    required this.isInDrawer,
   }) : super(key: key);
 
   @override
@@ -20,6 +18,7 @@ class CategoryTile extends StatefulWidget {
 
 class _CategoryTileState extends State<CategoryTile> {
   final _controller = Get.find<ProductsController>();
+  final _productsTabController = Get.find<ProductsTabController>();
 
   int underlinedselection = -1;
 
@@ -30,8 +29,10 @@ class _CategoryTileState extends State<CategoryTile> {
         expandedAlignment: Alignment.centerLeft,
         title: Text(
           widget.category.nome,
-          style:
-              TextStyle(color: Colors.grey[800], fontWeight: FontWeight.w500, fontSize: 19),
+          style: TextStyle(
+              color: Colors.grey[800],
+              fontWeight: FontWeight.w500,
+              fontSize: 19),
         ),
         children: [
           Column(
@@ -43,33 +44,26 @@ class _CategoryTileState extends State<CategoryTile> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         child: InkWell(
-                          onHover: widget.isInDrawer == false
-                              ? (hover) {
-                                  setState(() {
-                                    if (hover == true)
-                                      underlinedselection = e.id;
-                                    else
-                                      underlinedselection = -1;
-                                  });
-                                }
-                              : null,
+                          onHover: (hover) {
+                            setState(() {
+                              if (hover == true)
+                                underlinedselection = e.id;
+                              else
+                                underlinedselection = -1;
+                            });
+                          },
                           onTap: () {
-                            if (widget.isInDrawer == true) {
-                              Navigator.of(context).pop();
-                              if (ModalRoute.of(context)!.settings.name !=
-                                  "/products")
-                                Navigator.pushNamed(context, "/products");
+                            if (ModalRoute.of(context)!.settings.name ==
+                                "/produtos") {
+                              Navigator.pushReplacementNamed(
+                                context, "/produtos");    
+                              _controller.subCategoryId = e.id;
+                              _controller.getProductsBySubCategory(true);
                             } else {
-                              setState(() {
-                                var scrollParent = context
-                                    .findAncestorWidgetOfExactType<Scrollbar>();
-                                if (scrollParent!.controller!.hasClients)
-                                  scrollParent.controller!.jumpTo(scrollParent
-                                      .controller!.position.minScrollExtent);
-                              });
+                              _productsTabController.subCategoryId = e.id;
+                              _productsTabController.getCategory(true);
+                              Navigator.of(context).pop();
                             }
-                            _controller.subCategoryId = e.id;
-                            _controller.getProductsBySubCategory(true);
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(

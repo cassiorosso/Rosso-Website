@@ -19,5 +19,9 @@ abstract class IDatabase {
   Future<bool> insertImageUrl(int productId, String url);
   Future<bool> deleteImageUrl(String url);
   Future<NetworkResponseModel> getProduct(int productId);
+  Future<NetworkResponseModel> getDestaqueProducts(int limit, int offset);
+  Future<NetworkResponseModel> getNaoVisiveisProducts(int limit, int offset);
+  Future<NetworkResponseModel> getEstoqueProducts(int limit, int offset, double estoque);
+  Future<NetworkResponseModel> getBanners();
 
 }

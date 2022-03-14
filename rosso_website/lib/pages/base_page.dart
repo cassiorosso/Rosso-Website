@@ -5,6 +5,7 @@ import 'package:rosso_website/widgets/contact_widget.dart';
 import 'package:rosso_website/widgets/floatingActionButtonWhatsapp.dart';
 import 'package:rosso_website/widgets/googleMap_widget.dart';
 import 'package:rosso_website/widgets/menuDrawer_widget.dart';
+import 'package:rosso_website/widgets/navbarMobile_widget.dart';
 import 'package:rosso_website/widgets/navbar_widget.dart';
 import 'package:rosso_website/widgets/title_widget.dart';
 
@@ -38,7 +39,7 @@ class BasePage extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: size.isMobile(context: context) ? 120 : 80,
+                      height: size.isMobile(context: context) ? 100 : 65,
                     ), //Altura da Navbar
                     widget,
                     SizedBox(
@@ -53,7 +54,7 @@ class BasePage extends StatelessWidget {
               ),
             ),
           ),
-          Navbar(null, _drawerKey),
+          size.isMobile(context: context) ? NavbarMobile(drawerKey: _drawerKey) : Navbar(null, _drawerKey),
         ],
       ),
     );

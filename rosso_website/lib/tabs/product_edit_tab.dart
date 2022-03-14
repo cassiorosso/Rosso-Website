@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rosso_website/controllers/products_tab_controller.dart';
 import 'package:rosso_website/stores/categories_store.dart';
 import 'package:rosso_website/utils/scree_size.dart';
+import 'package:rosso_website/widgets/categories_widget.dart';
 import 'package:rosso_website/widgets/paginate_widget.dart';
 import 'package:rosso_website/widgets/product_edit_widget.dart';
 import 'package:rosso_website/widgets/search_bar_widget.dart';
@@ -47,42 +48,35 @@ class _ProductEditTabState extends State<ProductEditTab> {
               ),
               SearchBar(searchAction: _controller.searchProduct),
               SizedBox(
-                height: 20,
+                height: 15,
               ),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      elevation: 2,
-                      primary: Colors.green[700],
-                      onPrimary: Colors.white),
-                  onPressed: () => _controller.getProducts(true),
-                  child: Container(
-                    color: Colors.transparent,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: Text(
-                      "Carregar todos os produtos",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
-                  )),
+              Text("Filtrar produtos"),
               SizedBox(
-                height: 20,
+                height: 15,
               ),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      elevation: 2,
-                      primary: Colors.green[700],
-                      onPrimary: Colors.white),
-                  onPressed: () => _controller.getCategory(true),
-                  child: Container(
-                    color: Colors.transparent,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: Text(
-                      "Carregar Categoria Cachorros > Alimentação",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+              Obx(() {
+                return Container(
+                  width: size.col_3(context: context),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blueGrey),
+                      borderRadius: BorderRadius.circular(5)),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      isDense: true,
+                      value: _controller.filter.value,
+                      onChanged: (value) {
+                        if (value == 'Categoria') categoryDialog();
+                        else _controller.filterQuery(value!);
+                      },
+                      items: _controller.filters
+                          .map(
+                              (e) => DropdownMenuItem(value: e, child: Text(e)))
+                          .toList(),
                     ),
-                  )),
-              SizedBox(
-                height: 20,
-              ),
+                  ),
+                );
+              }),
               Obx(() {
                 if (_controller.productsStatus.value == Status.ERROR ||
                     _controller.productsStatus.value == Status.IDLE)
@@ -120,6 +114,27 @@ class _ProductEditTabState extends State<ProductEditTab> {
                   );
               }),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  categoryDialog() {
+    return showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        content: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(8)),
+            width: size.col_5(context: context),
+            child: CategoriesWidget(
+              categories: categoriesStore.allCategories,
+              isInDrawer: false,
+            ),
           ),
         ),
       ),

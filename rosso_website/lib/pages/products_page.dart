@@ -20,6 +20,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
   final _controller = Get.find<ProductsController>();
 
+
   //final _scrollController = ScrollController();
 
   @override
@@ -45,23 +46,41 @@ class _ProductsPageState extends State<ProductsPage> {
           height: 20,
         ),
         Visibility(
-            visible: size.isMobile(context: context),
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    elevation: 2,
-                    primary: Colors.red[400],
-                    onPrimary: Colors.white),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                  child: Text(
-                    "Categorias",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+          visible: size.isMobile(context: context),
+          child: Container(
+            width: size.col_9(context: context),
+            child: ExpansionTile(
+                collapsedBackgroundColor: Colors.red,
+                iconColor: Colors.grey[800],
+                collapsedTextColor: Colors.white,
+                collapsedIconColor: Colors.white,
+                textColor: Colors.grey[800],
+                initiallyExpanded: false,
+                title: Text(
+                  "Categorias",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 19),
+                ),
+                children: [
+                  Container(
+                    child: Obx(() {
+                      if (_categoriesStore.allCategories.length == 0)
+                        return Container(
+                            padding: EdgeInsets.all(10),
+                            height: 80,
+                            width: 80,
+                            child: Center(child: CircularProgressIndicator()));
+                      else
+                        return CategoriesWidget(
+                          categories: _categoriesStore.allCategories,
+                          isInDrawer: false,
+                        );
+                    }),
                   ),
-                ))),
+                ]),
+          ),
+        ),
         SizedBox(
           height: 15,
         ),
@@ -83,7 +102,10 @@ class _ProductsPageState extends State<ProductsPage> {
                           padding: EdgeInsets.all(10),
                           height: 80,
                           width: 80,
-                          child: Center(child: CircularProgressIndicator()));
+                          child: Center(
+                              child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.green))));
                     else
                       return CategoriesWidget(
                         categories: _categoriesStore.allCategories,
@@ -108,7 +130,10 @@ class _ProductsPageState extends State<ProductsPage> {
                         height: 80,
                         width: 80,
                         child: Center(
-                            child: Center(child: CircularProgressIndicator())));
+                            child: Center(
+                                child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.green)))));
                   else if (_controller.productStatus.value == Status.ERROR)
                     return Container(
                         padding: EdgeInsets.all(10),

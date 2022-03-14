@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                 null,
                 "assets/images/hortifruti.jpg",
                 "Assistência Técnica Agrônomica",
-                "Contamos com um engenheiro agrônomo para auxiliar o produtor em diversos tipos de cultura como hortifruti, soja, milho e muito mais, fornecendo um atendimento personalizado focado em produtividade e resultado."),
+                "Contamos com uma equipe especializada para auxiliar o produtor em diversos tipos de cultura como hortifruti, soja, milho e muito mais, fornecendo um atendimento personalizado focado em produtividade e resultado."),
           ],
         ),
         SizedBox(

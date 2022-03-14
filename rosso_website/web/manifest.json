@@ -1,11 +1,11 @@
 {
     "name": "rosso_website",
-    "short_name": "rosso_website",
+    "short_name": "Agrícola Veterinária Rosso",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Clínica Veterinária, Pet, Pesca, Camping, Ferragens, Sementes, Fertilizantes, Jardinagem e muito mais! Conheça nossa loja e desfrute de um atendimento personalizado. Av. Presidente Vargas 2731, São Cristóvão, Passo Fundo - RS",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

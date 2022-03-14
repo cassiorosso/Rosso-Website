@@ -68,7 +68,7 @@ class SpotLightProducts extends StatelessWidget {
                 elevation: 2,
                 primary: Colors.green[700],
                 onPrimary: Colors.white),
-            onPressed: () => Navigator.pushNamed(context, "/products"),
+            onPressed: () => Navigator.pushNamed(context, "/produtos"),
             child: Container(
               color: Colors.transparent,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),

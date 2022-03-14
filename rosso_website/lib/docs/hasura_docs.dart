@@ -204,10 +204,77 @@ class HasuraDocs {
   """;
 
   final String queryBanners = """
-            query getBanners {
+          query getBanners {
             website_db_banners(where: {visible: {_eq: true}}) {
+              url
+              isMobile
+            }
+          }
+  """;
+
+  final String queryDestaques = """
+          query DestaquesQuery(\$offset: Int!, \$limit: Int!) {
+          website_db_produtos(where: {destaque: {_eq: true}}, limit: \$limit, offset: \$offset) {
+            nome
+            id
+            destaque
+            cod_referencia
+            categoria_id
+            sub_categoria_id
+            visivel
+            produtos_imagens {
               url
             }
           }
+          website_db_produtos_aggregate(where: {destaque: {_eq: true}}) {
+            aggregate {
+              count
+            }
+          }
+        }
+  """;
+
+  final String queryNaoVisiveis = """
+          query NaoVisiveisQuery(\$offset: Int!, \$limit: Int!) {
+          website_db_produtos(where: {visivel: {_eq: false}}, limit: \$limit, offset: \$offset) {
+            nome
+            id
+            destaque
+            cod_referencia
+            categoria_id
+            sub_categoria_id
+            visivel
+            produtos_imagens {
+              url
+            }
+          }
+          website_db_produtos_aggregate(where: {visivel: {_eq: false}}) {
+            aggregate {
+              count
+            }
+          }
+        }
+  """;
+
+  final String queryEstoque = """
+        query EstoqueQuery(\$offset: Int!, \$limit: Int!, \$estoque: float8!) {
+        website_db_produtos(where: {estoque: {_eq: \$estoque}}, limit: \$limit, offset: \$offset) {
+          nome
+          id
+          destaque
+          cod_referencia
+          categoria_id
+          sub_categoria_id
+          visivel
+          produtos_imagens {
+            url
+          }
+        }
+        website_db_produtos_aggregate(where: {estoque: {_eq: \$estoque }}) {
+          aggregate {
+            count
+          }
+        }
+      }
   """;
 }

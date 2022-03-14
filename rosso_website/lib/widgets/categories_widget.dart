@@ -22,10 +22,12 @@ class CategoriesWidget extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 10,),
-            Text("CATEGORIAS", style: TextStyle(fontSize: 20, color: Colors.grey[800]),),
+            Visibility(
+              visible: !size.isMobile(context: context),
+              child: Text("CATEGORIAS", style: TextStyle(fontSize: 20, color: Colors.grey[800]),)),
             SizedBox(height: 10,),
             Column(
-              children: categories.map((e) => CategoryTile(category: e, isInDrawer: isInDrawer,)).toList(),
+              children: categories.map((e) => CategoryTile(category: e,)).toList(),
             ),
           ],
         ),

@@ -9,7 +9,7 @@ class TittleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-      child: Text(title, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, fontFamily: "Montserrat" , letterSpacing: 1), textAlign: TextAlign.center,),
+      child: SelectableText(title, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, fontFamily: "Montserrat" , letterSpacing: 1), textAlign: TextAlign.center,),
     );
   }
 }

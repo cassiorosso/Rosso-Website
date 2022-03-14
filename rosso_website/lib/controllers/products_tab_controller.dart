@@ -10,19 +10,53 @@ enum Status { LOADING, ERROR, SUCCESS, IDLE }
 class ProductsTabController extends GetxController {
   final int limit = 25;
   int offset = 0;
+  int subCategoryId = 0;
   final db = Get.find<IDatabase>();
+  List<String> filters = [
+    'Todos',
+    'Destaques',
+    'Não visíveis',
+    'Estoque = 0',
+    'Estoque = 1',
+    'Categoria'
+  ];
+  Rx<String> filter = 'Todos'.obs;
   NetworkResponseModel response =
       NetworkResponseModel(data: "", error: "", count: 0);
   Rx<Status> productsStatus = Status.IDLE.obs;
   List<ProductModel> products = <ProductModel>[];
   int currentPage = 1;
   int pages = 0;
+  double estoque = 0;
   bool alreadyConnected = false;
   String searchStorage = "";
   String typesProductsRequest = "";
 
   ProductsTabController() {
     getProducts(true);
+  }
+
+  void filterQuery(String value) {
+    filter.value = value;
+    switch (value) {
+      case "Todos":
+        getProducts(true);
+        break;
+      case "Destaques":
+        getDestaques(true);
+        break;
+      case "Não visíveis":
+        getInvisiveis(true);
+        break;
+      case "Estoque = 0":
+        estoque = 0;
+        getEstoque(true);
+        break;
+      case "Estoque = 1":
+        estoque = 1;
+        getEstoque(true);
+        break;
+    }
   }
 
   void getProducts(bool newRequest) async {
@@ -40,10 +74,10 @@ class ProductsTabController extends GetxController {
     alreadyConnected = true;
   }
 
-  void getCategory(bool newRequest)async{
-        productsStatus.value = Status.LOADING;
+  void getCategory(bool newRequest) async {
+    productsStatus.value = Status.LOADING;
     if (newRequest == true) offset = 0;
-    response = await db.getProductBySubCategory(limit, offset, 1);
+    response = await db.getProductBySubCategory(limit, offset, subCategoryId);
     if (response.error.isEmpty) {
       pages = (response.count / limit).ceil();
       currentPage = ((offset / limit) + 1).toInt();
@@ -70,19 +104,47 @@ class ProductsTabController extends GetxController {
       productsStatus.value = Status.ERROR;
   }
 
-  //   Future<void> getProductsBySubCategory(bool newRequest) async {
-  //   productsStatus.value = Status.LOADING;
-  //   if (newRequest == true) offset = 0;
-  //   response = await db.getProductBySubCategory(limit, offset, subCategoryId);
-  //   if (response.error.isEmpty) {
-  //     pages = (response.count / limit).ceil();
-  //     currentPage = ((offset / limit) + 1).toInt();
-  //     products.assignAll(response.data);
-  //     typesProductsRequest = "Categoria";
-  //     productStatus.value = Status.SUCCESS;
-  //   } else
-  //     productStatus.value = Status.ERROR;
-  // }
+  void getDestaques(bool newRequest) async {
+    productsStatus.value = Status.LOADING;
+    if (newRequest == true) offset = 0;
+    response = await db.getDestaqueProducts(limit, offset);
+    if (response.error.isEmpty) {
+      pages = (response.count / limit).ceil();
+      currentPage = ((offset / limit) + 1).toInt();
+      products = response.data;
+      typesProductsRequest = "Destaques";
+      productsStatus.value = Status.SUCCESS;
+    } else
+      productsStatus.value = Status.ERROR;
+  }
+
+  void getInvisiveis(bool newRequest) async {
+    productsStatus.value = Status.LOADING;
+    if (newRequest == true) offset = 0;
+    response = await db.getNaoVisiveisProducts(limit, offset);
+    if (response.error.isEmpty) {
+      pages = (response.count / limit).ceil();
+      currentPage = ((offset / limit) + 1).toInt();
+      products = response.data;
+      typesProductsRequest = "Invisiveis";
+      productsStatus.value = Status.SUCCESS;
+    } else
+      productsStatus.value = Status.ERROR;
+  }
+
+  void getEstoque(bool newRequest) async {
+    productsStatus.value = Status.LOADING;
+    if (newRequest == true) offset = 0;
+    response = await db.getEstoqueProducts(limit, offset, estoque);
+    if (response.error.isEmpty) {
+      pages = (response.count / limit).ceil();
+      currentPage = ((offset / limit) + 1).toInt();
+      products = response.data;
+      typesProductsRequest = "Estoque";
+      productsStatus.value = Status.SUCCESS;
+    } else
+      productsStatus.value = Status.ERROR;
+  }
 
   void changePage(int page) async {
     offset = limit * (page - 1);
@@ -95,6 +157,15 @@ class ProductsTabController extends GetxController {
         break;
       case "Categoria":
         getCategory(false);
+        break;
+      case "Destaques":
+        getDestaques(false);
+        break;
+      case "Invisiveis":
+        getInvisiveis(false);
+        break;
+      case "Estoque":
+        getEstoque(false);
         break;
     }
   }

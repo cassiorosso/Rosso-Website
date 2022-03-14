@@ -14,7 +14,7 @@ import 'package:rosso_website/utils/scree_size.dart';
 Widget LocationMap(BuildContext context) {
   final size = ScreenSize();
   return Container(
-    height: 500,
+    height: 380,
     width: size.col_12(context: context),
     child: googleMap(),
   );
@@ -28,6 +28,8 @@ Widget googleMap() {
       (int viewId) => IFrameElement()
         ..width = '800'
         ..height = '500'
+        ..style.width = '100%'
+        ..style.height = '100%'
         ..src =
             "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3513.6923284634636!2d-52.3806839!3d-28.2773447!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x80f4f861965e0a06!2sAgr%C3%ADcola%20Veterin%C3%A1ria%20Rosso!5e0!3m2!1spt-BR!2sbr!4v1624805706604!5m2!1spt-BR!2sbr"
         //..style.border = '10px white solid'

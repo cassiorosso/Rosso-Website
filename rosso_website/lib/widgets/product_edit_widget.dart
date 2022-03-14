@@ -40,7 +40,7 @@ class ProductEditWidget extends StatelessWidget {
                 Container(
                     alignment: Alignment.centerLeft,
                     width: size.col_3(context: context),
-                    child: Text(
+                    child: SelectableText(
                       product.nome,
                       style: TextStyle(fontSize: 16),
                     )),
@@ -50,7 +50,7 @@ class ProductEditWidget extends StatelessWidget {
                 Container(
                     alignment: Alignment.centerLeft,
                     width: size.col_3(context: context),
-                    child: Text(
+                    child: SelectableText(
                       "código referência: ${product.codReferencia}",
                       style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                     )),

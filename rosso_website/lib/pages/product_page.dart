@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +7,7 @@ import 'package:rosso_website/controllers/product_controller.dart';
 import 'package:rosso_website/stores/categories_store.dart';
 import 'package:rosso_website/utils/scree_size.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 import 'dart:js' as js;
 
 class ProductPage extends StatefulWidget {
@@ -44,7 +47,7 @@ class _ProductPageState extends State<ProductPage> {
                 height: 80,
                 width: 80,
                 child:
-                    Center(child: Center(child: CircularProgressIndicator())));
+                    Center(child: Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.green)))));
           else if (_controller.productStatus == Status.ERROR)
             return Container(
                 padding: EdgeInsets.all(10),
@@ -75,8 +78,7 @@ class _ProductPageState extends State<ProductPage> {
               return Wrap(
                 alignment: WrapAlignment.center,
                 children: [
-                  Stack(
-                    children: [
+                  Stack(children: [
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -103,7 +105,9 @@ class _ProductPageState extends State<ProductPage> {
                                   )
                                 ]
                               : _controller.produto.produtosImagens
-                                  .map((e) => Image.network(e))
+                                  .map((e) => ImageRenderer(alt: _controller.produto.nome,
+                                  link: e,
+                                  child: Image.network(e)))
                                   .toList()),
                     ),
                     Positioned(
@@ -112,20 +116,26 @@ class _ProductPageState extends State<ProductPage> {
                         child: IconButton(
                           icon: Icon(
                             Icons.arrow_forward_ios_rounded,
-                            color: _controller.produto.produtosImagens.length <=1 ? Colors.transparent : Colors.grey[700],
+                            color:
+                                _controller.produto.produtosImagens.length <= 1
+                                    ? Colors.transparent
+                                    : Colors.grey[700],
                           ),
                           iconSize: 38,
                           onPressed: () {
                             buttonCarouselController.nextPage();
                           },
                         )),
-                        Positioned(
+                    Positioned(
                         left: 10,
                         top: 180,
                         child: IconButton(
                           icon: Icon(
                             Icons.arrow_back_ios_new_rounded,
-                            color: _controller.produto.produtosImagens.length <=1 ? Colors.transparent : Colors.grey[700],
+                            color:
+                                _controller.produto.produtosImagens.length <= 1
+                                    ? Colors.transparent
+                                    : Colors.grey[700],
                           ),
                           iconSize: 38,
                           onPressed: () {
@@ -143,22 +153,28 @@ class _ProductPageState extends State<ProductPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                            child: Text(
-                          _controller.produto.nome,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 26),
+                            child: TextRenderer(
+                          element: HeadingElement.h1(),    
+                          text: SelectableText(
+                            _controller.produto.nome,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 26),
+                          ),
                         )),
                         SizedBox(
                           height: 10,
                         ),
-                        Text("$categoria > $subCategoria",
-                            style: TextStyle(fontSize: 18),
-                            textAlign: TextAlign.center),
+                        TextRenderer(
+                          element: ParagraphElement(),
+                          text: SelectableText("$categoria > $subCategoria",
+                              style: TextStyle(fontSize: 18),
+                              textAlign: TextAlign.center),
+                        ),
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
+                        SelectableText(
                           "Referência: ${_controller.produto.codReferencia.toString()}",
                         ),
                         SizedBox(
@@ -170,7 +186,7 @@ class _ProductPageState extends State<ProductPage> {
                                 primary: Colors.green[700],
                                 onPrimary: Colors.white),
                             onPressed: () => js.context.callMethod('open', [
-                                  'https://api.whatsapp.com/send?phone=5554991413355&text=Olá, gostaria de encomendar esse produto: ${_controller.produto.nome} (${_controller.produto.codReferencia})'
+                                  'https://api.whatsapp.com/send?phone=5554991413355&text=Olá, gostaria de mais informações sobre esse produto: ${_controller.produto.nome} (${_controller.produto.codReferencia})'
                                 ]),
                             child: Container(
                               color: Colors.transparent,
@@ -194,7 +210,9 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             )),
                         Text(
-                            "\n\n*Venda por Whatsapp válida apenas para Passo Fundo - RS", textAlign: TextAlign.center,)
+                          "\n\n*Venda por Whatsapp válida apenas para Passo Fundo - RS",
+                          textAlign: TextAlign.center,
+                        )
                       ],
                     ),
                   ),
@@ -207,11 +225,13 @@ class _ProductPageState extends State<ProductPage> {
                           SizedBox(
                             height: 35,
                           ),
-                          Text(
-                            "DESCRIÇÃO  ",
-                            style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.w600),
-                            textAlign: TextAlign.center,
+                          TextRenderer(
+                            text: SelectableText(
+                              "DESCRIÇÃO  ",
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.w600),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                           SizedBox(
                             height: 20,
@@ -221,8 +241,17 @@ class _ProductPageState extends State<ProductPage> {
                             decoration: BoxDecoration(
                                 color: Colors.white60,
                                 border: Border.all(color: Colors.black12)),
-                            child: Html(
-                              data: _controller.produto.descricao,
+                            child: TextRenderer(
+                              element: ParagraphElement(),
+                              text: Html(
+                                data: _controller.produto.descricao,
+                                style: {
+                                  "body": Style(
+                                    lineHeight: LineHeight.number(1.25),
+                                    fontSize: FontSize(15.0),
+                                  ),
+                                },
+                              ),
                             ),
                           ),
                         ],

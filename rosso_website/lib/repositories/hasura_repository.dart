@@ -1,6 +1,7 @@
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:rosso_website/docs/hasura_docs.dart';
 import 'package:rosso_website/interfaces/database_interface.dart';
+import 'package:rosso_website/models/banner_model.dart';
 import 'package:rosso_website/models/category_model.dart';
 import 'package:rosso_website/models/message_model.dart';
 import 'package:rosso_website/models/network_response_model.dart';
@@ -304,6 +305,121 @@ class HasuraRepository implements IDatabase {
             ProductModel.fromMap(snapshot["data"]["website_db_produtos"][0]);
         response.data = produto;
       }
+      return response;
+    } on Exception catch (e) {
+      print(e.toString());
+      response.error = "${e.toString()}";
+      return response;
+    }
+  }
+
+  @override
+  Future<NetworkResponseModel> getDestaqueProducts(int limit, int offset) async{
+    NetworkResponseModel response =
+        NetworkResponseModel(error: "", data: "", count: 0);
+
+    try {
+      final snapshot =
+          await _hasuraConnect.query(_hasuraDocs.queryDestaques, variables: {
+        "limit": limit,
+        "offset": offset,
+      });
+      List<ProductModel> produtos = [];
+      for (int i = 0; i < snapshot["data"]["website_db_produtos"].length; i++) {
+        produtos.add(
+            ProductModel.fromMap(snapshot["data"]["website_db_produtos"][i]));
+      }
+
+      response.data = produtos;
+      response.count = snapshot["data"]["website_db_produtos_aggregate"]
+          ["aggregate"]["count"];
+      return response;
+    } on Exception catch (e) {
+      print(e.toString());
+      response.error = "${e.toString()}";
+      return response;
+    }
+  }
+
+  @override
+  Future<NetworkResponseModel> getEstoqueProducts(int limit, int offset, double estoque) async{
+    NetworkResponseModel response =
+        NetworkResponseModel(error: "", data: "", count: 0);
+
+    try {
+      final snapshot =
+          await _hasuraConnect.query(_hasuraDocs.queryEstoque, variables: {
+        "limit": limit,
+        "offset": offset,
+        "estoque": estoque,
+      });
+      List<ProductModel> produtos = [];
+      for (int i = 0; i < snapshot["data"]["website_db_produtos"].length; i++) {
+        produtos.add(
+            ProductModel.fromMap(snapshot["data"]["website_db_produtos"][i]));
+      }
+
+      response.data = produtos;
+      response.count = snapshot["data"]["website_db_produtos_aggregate"]
+          ["aggregate"]["count"];
+      return response;
+    } on Exception catch (e) {
+      print(e.toString());
+      response.error = "${e.toString()}";
+      return response;
+    }
+  }
+
+  @override
+  Future<NetworkResponseModel> getNaoVisiveisProducts(int limit, int offset) async{
+    NetworkResponseModel response =
+        NetworkResponseModel(error: "", data: "", count: 0);
+
+    try {
+      final snapshot =
+          await _hasuraConnect.query(_hasuraDocs.queryNaoVisiveis, variables: {
+        "limit": limit,
+        "offset": offset,
+      });
+      List<ProductModel> produtos = [];
+      for (int i = 0; i < snapshot["data"]["website_db_produtos"].length; i++) {
+        produtos.add(
+            ProductModel.fromMap(snapshot["data"]["website_db_produtos"][i]));
+      }
+
+      response.data = produtos;
+      response.count = snapshot["data"]["website_db_produtos_aggregate"]
+          ["aggregate"]["count"];
+      return response;
+    } on Exception catch (e) {
+      print(e.toString());
+      response.error = "${e.toString()}";
+      return response;
+    }
+  }
+
+  @override
+  Future<NetworkResponseModel> getBanners() async{
+        NetworkResponseModel response =
+        NetworkResponseModel(error: "", data: "", count: 0);
+
+    try {
+      final snapshot =
+          await _hasuraConnect.query(_hasuraDocs.queryBanners);
+
+      List<BannerModel> banners = [];
+      for (int i = 0; i < snapshot["data"]["website_db_banners"].length; i++) {
+        banners.add(
+            BannerModel.fromMap(snapshot["data"]["website_db_banners"][i]));
+      }
+
+      response.data = banners;
+
+      // List<BannerModel> banners = List.generate(
+      //     snapshot["data"]["website_db_banners"].length,
+      //     (index) => BannerModel.fromMap(
+      //         snapshot["data"]["website_db_banners"][index]));
+      
       return response;
     } on Exception catch (e) {
       print(e.toString());

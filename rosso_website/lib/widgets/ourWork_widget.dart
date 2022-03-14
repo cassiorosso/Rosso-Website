@@ -1,5 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:rosso_website/utils/scree_size.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer.dart';
 
 class OurWork extends StatelessWidget {
   final ScreenSize size = ScreenSize();
@@ -23,16 +26,19 @@ class OurWork extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20,),
-          Text(
+          SelectableText(
             title,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 10,),
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, height: 1.4)
+          TextRenderer(
+            element: ParagraphElement(),
+            text: SelectableText(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, height: 1.4)
+            ),
           ),
         ],
       ),
